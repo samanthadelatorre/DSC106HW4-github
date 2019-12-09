@@ -1,0 +1,214 @@
+
+
+<html>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+  <div id="word-cloud"></div>
+    <body>
+          <div id="radar"></div>
+            <br/>
+            <div id="container1"></div>
+      </body>
+    <script>
+      data = [
+        {name: "American Graffiti", weight: 140},
+        {name: "Star Wars", weight: 775},
+        {name: "The Empire Strikes Back", weight: 538},
+        {name: "Return of the Jedi", weight: 475},
+        {name: "Raiders of the Lost Ark", weight: 390},
+        {name: "Temple of Doom", weight: 333},
+        {name: "The Last Crusade", weight: 474},
+        {name: "Blade Runner", weight: 259},
+        {name: "The Mosquito Coast", weight: 14.3},
+        {name: "Frantic", weight: 18},
+        {name: "Working Girl", weight: 102},
+        {name: "Witness", weight: 69},
+        {name: "Presumed Innocent", weight: 221},
+        {name: "Regarding Henry", weight: 43},
+        {name: "Sabrina", weight: 87},
+        {name: "The Fugitive", weight: 369},
+        {name: "Air Force One", weight: 315},
+        {name: "Morning Glory", weight: 60},
+        {name: "Paranoia", weight: 16},
+        {name: "42", weight: 95},
+        {name: "Patriot Games", weight: 178},
+        {name: "Clear and Present Danger", weight: 216},
+        {name: "What Lies Beneath", weight: 291},
+        {name: "Enders Game", weight: 126},
+        {name: "Hollywood Homicide", weight: 51}
+       ];
+  
+       Highcharts.chart('word-cloud', {
+         series: [{
+             type: 'wordcloud',
+             data: data,
+             name: 'Box office sales (in millions of USD)'
+         }],
+         title: {
+             text: "Wordcloud of Harrison Ford's Movies Based on Box Office Sales (USD)"
+         }
+       });
+  
+  
+      var categories = ["Drama", "Comedy", "Action", "Sci-fi", "Thriller"];
+      Highcharts.chart('radar', {
+  
+      chart: {
+          polar: true
+      },
+  
+      title: {
+          text: 'Average Metascore by Genre (out of 100)'
+      },
+  
+      pane: {
+          startAngle: 0,
+          endAngle: 360
+      },
+  
+      xAxis: {
+          tickInterval: 45,
+          min: 0,
+          max: 360,
+          labels: {
+              formatter: function () {
+                  return categories[this.value];
+              },
+              step: 1
+          }
+      },
+  
+      yAxis: {
+          min: 0
+      },
+  
+      plotOptions: {
+          series: {
+              pointStart: 0,
+              pointInterval: 45
+          },
+          column: {
+              pointPadding: 0,
+              groupPadding: 0
+          }
+      }, 
+      series: [{
+        type: 'pie',
+        animation: false,
+        linkedTo: 'main',
+        size: '5%',
+        dataLabels: {
+    	    distance: 130
+        },
+        states: {
+    	    hover: {
+      	    enabled: false,
+            brightness: 0
+            }
+    },
+   
+  }, {
+    type: 'column',
+    name: 'Avg Score',
+    id: 'main',
+    colorByPoint: true,
+    animation: false,
+    states: {
+    	hover: {
+        brightness: 0
+      }
+    },
+    data: [{
+        name: 'Drama',
+      y: 58.2
+    }, {
+      name: 'Comedy',
+      y: 66
+    }, {
+      name: 'Action',
+      y: 75
+    }, {
+      name: 'Sci-fi',
+      y: 72.4
+    }, {
+      name: 'Thriller',
+      y: 62.4
+    }],
+    pointPlacement: 'between'
+  }]
+});
+
+  var data2 = [
+        {name: "American Graffiti", weight: 97},
+        {name: "Star Wars", weight: 90},
+        {name: "The Empire Strikes Back", weight: 82},
+        {name: "Return of the Jedi", weight: 58},
+        {name: "Raiders of the Lost Ark", weight: 85},
+        {name: "Temple of Doom", weight: 57},
+        {name: "The Last Crusade", weight: 65},
+        {name: "Blade Runner", weight: 81},
+        {name: "The Mosquito Coast", weight: 49},
+        {name: "Frantic", weight: 66},
+        {name: "Working Girl", weight: 73},
+        {name: "Witness", weight: 76},
+        {name: "Presumed Innocent", weight: 72},
+        {name: "Regarding Henry", weight: 47},
+        {name: "Sabrina", weight: 56},
+        {name: "The Fugitive", weight: 87},
+        {name: "Air Force One", weight: 61},
+        {name: "Morning Glory", weight: 57},
+        {name: "Paranoia", weight: 32},
+        {name: "42", weight: 62},
+        {name: "Patriot Games", weight: 64},
+        {name: "Clear and Present Danger", weight: 74},
+        {name: "What Lies Beneath", weight: 51},
+        {name: "Enders Game", weight: 51},
+        {name: "Hollywood Homicide", weight: 47}
+       ];
+  
+  var data = [97, 90, 82, 58, 85, 57, 65, 81, 49, 66, 73, 76, 72, 47, 56, 87, 61, 57, 32, 62, 64, 74, 51, 51, 47];
+  
+  Highcharts.chart('container1', {
+      title: {
+          text: 'Average Harrison Ford Movie Ratings'
+      },
+      xAxis: [{
+          title: { text: 'Movie Data' },
+          alignTicks: false
+      }, {
+          title: { text: null },
+          alignTicks: false,
+          opposite: true
+      }],
+  
+      yAxis: [{
+          title: { text: 'Metascore' }
+      }, {
+          title: null,
+          opposite: true
+      }],
+  
+      series: [{
+          name: 'Metascore Bin',
+          type: 'histogram',
+          xAxis: 1,
+          yAxis: 1,
+          baseSeries: 's1',
+          zIndex: -1
+      }, {
+          name: 'Movie & Score',
+          type: 'scatter',
+          data: data,
+          id: 's1',
+          marker: {
+              radius: 1.5
+          }
+      }]
+  });
+      </script>
+  </html>
